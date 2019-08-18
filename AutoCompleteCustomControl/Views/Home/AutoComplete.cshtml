@@ -1,0 +1,61 @@
+﻿@using AutoCompleteCustomControl.Extensions
+@model AutoCompleteCustomControl.Models.Patient
+@{
+    ViewBag.Title = "AutoComplete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Auto Complete Custom Control Demo</h2>
+
+<form>
+    <div class="form-horizontal">
+        <h4>AutoComplete</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+
+        <div class="form-group">
+            @Html.Label("With Source URL:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Autocomplete("Patientgeneral", "", "", actionUrl: "/Home/GetPatients", isRequired: true, onselectfunction: "onPatientSelection")
+                @Html.ValidationMessage("Patientgeneral_AutoComplete")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("With Patient type:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Autocomplete("Patient", "", "", AutoCompleteType.Patient)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("With Lab type:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Autocomplete("Lab", "", "", AutoCompleteType.Lab)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Binding to view model:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.AutocompleteFor(m => m.PatientId, @Model.PatientName, AutoCompleteType.Patient, isRequired: true)
+                @Html.ValidationMessage("PatientId_AutoComplete")
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+    <script>
+
+        function onEmpSelection(event, ui)
+        {
+            alert('selected Value=' + ui.item.selectedValue + ', Selected Text=' + ui.item.label);
+        }
+    </script>
+}
