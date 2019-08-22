@@ -25,8 +25,8 @@ namespace AutoCompleteCustomControl.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
+            ContactModel model = new ContactModel();
+            return View(model);
         }
 
         public ActionResult AutoComplete()

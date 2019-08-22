@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AutoCompleteCustomControl.Models.ContactModel
+@{
     ViewBag.Title = "Contact";
 }
 <h2>@ViewBag.Title.</h2>
@@ -15,3 +16,23 @@
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+
+@Html.Partial("_ipcContactControl", Model.ContactPartialVM, new ViewDataDictionary(Html.ViewDataContainer.ViewData)
+                        {
+                            TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "MyOne" }
+                        })
+
+<hr />
+
+@Html.Partial("_ipcContactControl", Model.ContactPartialVM, new ViewDataDictionary(Html.ViewDataContainer.ViewData)
+                        {
+                            TemplateInfo = new System.Web.Mvc.TemplateInfo { HtmlFieldPrefix = "MySecond" }
+                        })
+
+
+
+
+@section scripts {
+    <script src="~/Scripts/ipc_contact/ipc_contact.js"></script>
+}
